@@ -18,7 +18,7 @@ connectDB();
 
 app.use(
   cors({
-    origin: "*",
+    origin: process.env.FRONTEND_URL,
     credentials: false,
   }),
 );
