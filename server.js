@@ -5,23 +5,23 @@ const cors = require("cors");
 const path = require("path");
 
 const connectDB = require("./config/db");
-
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const ticketRoutes = require("./routes/ticketRoutes");
 
-const errorMiddleware = require("./middleware/errorMiddleware");
-
 const app = express();
+
 connectDB();
 
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true,
-  }),
-);
+const corsOptions = {
+  origin: "https://it-desk-help-frontend.vercel.app",
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -40,10 +40,8 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use(errorMiddleware);
-
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, "0.0.0.0", () => {
+app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
