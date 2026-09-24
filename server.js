@@ -15,7 +15,7 @@ const app = express();
 connectDB();
 
 const corsOptions = {
-  origin: "process.env.FRONTEND_URL",
+  origin: "https://it-desk-help-frontend.vercel.app",
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
